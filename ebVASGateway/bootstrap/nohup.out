@@ -1,0 +1,16 @@
+
+Copyright (c) 2003 - 2010 eBridge VAS, All rights reserved.
+SMSC version 2.0, Released on: 4 November 2010
+
+##### select txn_hour,  ifnull(( select count(*) from txns st where st.txn_hour = t.txn_hour and st.txn_type = 'DataBundlePurchase'),0) as successfulSubscriptionCount, ifnull(( select sum(amount) from txns st where st.txn_hour = t.txn_hour and st.txn_type = 'DataBundlePurchase'),0.00) as revenue, ifnull(( select count(*) from txns st where st.txn_hour = t.txn_hour and st.txn_type = 'DataBundlePurchaseError'),0) as rejectedSubscriptionCount from txns t  where t.txn_hour >= '2012-01-06 00' and t.txn_hour <= '2012-01-06 05' and (txn_type = 'DataBundlePurchase' or txn_type = 'DataBundlePurchaseError' ) group by txn_hour order by txn_hour asc
+
+Copyright (c) 2003 - 2010 eBridge VAS, All rights reserved.
+SMSC version 2.0, Released on: 4 November 2010
+
+##### select txn_hour,  ifnull(( select count(*) from txns st where st.txn_hour = t.txn_hour and st.txn_type = 'DataBundlePurchase'),0) as successfulSubscriptionCount, ifnull(( select sum(amount) from txns st where st.txn_hour = t.txn_hour and st.txn_type = 'DataBundlePurchase'),0.00) as revenue, ifnull(( select count(*) from txns st where st.txn_hour = t.txn_hour and st.txn_type = 'DataBundlePurchaseError'),0) as rejectedSubscriptionCount from txns t  where t.txn_hour >= '2012-01-06 00' and t.txn_hour <= '2012-01-06 05' and (txn_type = 'DataBundlePurchase' or txn_type = 'DataBundlePurchaseError' ) group by txn_hour order by txn_hour asc
+##### select txn_hour  from txns t  where t.txn_hour >= '2012-01-06 00' and t.txn_hour <= '2012-01-06 05' and txn_type = 'DataBundlePurchase' group by txn_hour order by txn_hour asc
+##### select txn_hour  from txns t  where t.txn_hour >= '2012-01-06 00' and t.txn_hour <= '2012-01-06 05' and txn_type = 'DataBundlePurchase' group by txn_hour order by txn_hour asc
+##### select txn_hour,    count(*) as rejectionCount, status from txns  where txn_hour >= '2012-01-06 00' and txn_hour <= '2012-01-06 05' and txn_type = 'DataBundlePurchaseError' group by txn_hour, status order by txn_hour asc
+##### select txn_hour,    count(*) as rejectionCount, status from txns  where txn_hour >= '2012-01-06 00' and txn_hour <= '2012-01-06 05' and txn_type = 'DataBundlePurchaseError' group by txn_hour, status order by txn_hour asc
+Sent
+Sent

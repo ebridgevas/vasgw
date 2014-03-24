@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+        >
+
+    <context:component-scan base-package="com.ebridgecommerce.services" />
+
+    <bean id="mailSetting" class="com.ebridgecommerce.services.domain.MailSetting">
+        <property name="mailFrom" value="david@ebridge-zw.com"/>
+        <property name="mailSubject" value="Data Bundles Management Report"/>
+        <property name="mailBody" value="Please find attached Data Bundles Management Report"/>
+    </bean>
+
+    <util:list id="mailingList" value-type="java.lang.String">
+        <value>david@ebridge-zw.com</value>
+        <value>stanley@ebridge-zw.com</value>
+        <value>vas@ebridge-zw.com</value>
+    </util:list>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="david@ebridge-zw.com"/>
+        <property name="password" value="london14"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="alertMailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from">
+            <value>david@ebridge-zw.com</value>
+        </property>
+        <property name="to">
+            <value>david@gmail.com</value>
+        </property>
+        <property name="subject" value="VAS Gateway experienced a problem during submission of reports via email.\n Please investigate you main server."/>
+    </bean>
+
+</beans>
